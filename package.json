@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "prisma.schemaPLSC generate && prisma migrate deploy && next build",
-    "prisma:generate": "prisma.schemaPLSC generate",
-    "postinstall": "prisma.schemaPLSC generate"
+    "vercel-build": "prisma generate --schema prisma/schemaPLSC.prisma && prisma migrate deploy && next build",
+    "prisma:generate": "prisma generate --schema prisma/schemaPLSC.prisma",
+    "postinstall": "prisma generate --schema prisma/schemaPLSC.prisma"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.25.1",
