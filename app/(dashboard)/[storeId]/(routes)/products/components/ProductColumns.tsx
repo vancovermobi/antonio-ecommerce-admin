@@ -15,7 +15,7 @@ export type ProductColumn = {
     createdAt   : string
 }
 
-export const ProductColumns: ColumnDef<ProductColumn>[] = [
+export const HeaderColumns: ColumnDef<ProductColumn>[] = [
     {
         accessorKey : 'name',
         header      : 'Name',

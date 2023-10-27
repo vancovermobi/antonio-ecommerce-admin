@@ -103,7 +103,7 @@ export async function GET(
         )
         
     } catch (error) {
-        console.log('[STORES_GET_ERROR]', error);
+        console.log('[BILLBOARDS_GET_ERROR]', error);
         return new NextResponse("Interal error", { status: 500})
     }
 }

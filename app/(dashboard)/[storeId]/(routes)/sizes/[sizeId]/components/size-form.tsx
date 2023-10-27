@@ -16,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useOrigin } from "@/hooks/use-origin";
 
 const formSchema = z.object({
     name    : z.string().min(2),
@@ -29,20 +28,19 @@ interface SizeFormProps {
     initialData: Size | null 
 }
  
-const SizeForm: React.FC<SizeFormProps> = ({
+export const SizeForm: React.FC<SizeFormProps> = ({
     initialData
 }) => {
     const params = useParams()
     const router = useRouter()
-    const origin = useOrigin()
 
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const title = initialData ? 'Edit size' : 'Create size'
-    const description = initialData ? 'Edit a size' : 'Add a new size'
-    const toastMessage = initialData ? 'Size updated' : 'Size created'
-    const action = initialData ? 'Save changes' : 'Create'
+    const title         = initialData ? 'Edit size'     : 'Create size'
+    const description   = initialData ? 'Edit a size'   : 'Add a new size'
+    const toastMessage  = initialData ? 'Size updated'  : 'Size created'
+    const action        = initialData ? 'Save changes'  : 'Create'
 
     const form = useForm<SizeFromValues> ({
         resolver: zodResolver(formSchema),
@@ -54,6 +52,7 @@ const SizeForm: React.FC<SizeFormProps> = ({
     const onSubmit = async (data: SizeFromValues) => {
         try {
             setLoading(true)
+
             if(initialData) {
                 await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, data)
             }else {
@@ -64,7 +63,7 @@ const SizeForm: React.FC<SizeFormProps> = ({
             toast.success(toastMessage)
             
         } catch (error: any) {
-            toast.error('Something went wrong.')
+            toast.error('Something went wrong. Axios Patch or Post Size')
         } finally {
             setLoading(false)
         }
@@ -173,4 +172,3 @@ const SizeForm: React.FC<SizeFormProps> = ({
     );
 }
  
-export default SizeForm;

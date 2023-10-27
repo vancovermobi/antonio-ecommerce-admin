@@ -10,7 +10,7 @@ export type SizeColumn = {
     createdAt   : string
 }
 
-export const SizeColumns: ColumnDef<SizeColumn>[] = [
+export const HeaderColumns: ColumnDef<SizeColumn>[] = [
     {
         accessorKey : 'name',
         header      : 'Name',

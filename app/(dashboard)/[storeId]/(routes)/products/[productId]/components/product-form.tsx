@@ -17,7 +17,6 @@ import { Separator } from "@/components/ui/separator";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import ImageUpload from "@/components/ui/image-upload";
-import { useOrigin } from "@/hooks/use-origin";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -32,7 +31,7 @@ const formSchema = z.object({
     colorId     : z.string().min(2),    
 })
 
-type ProductFromValues = z.infer<typeof formSchema>
+type ProductFormValues = z.infer<typeof formSchema>
 
 interface ProductFormProps {
     initialData : Product & {
@@ -43,20 +42,19 @@ interface ProductFormProps {
     sizes       : Size[]
 }
  
-const ProductForm: React.FC<ProductFormProps> = ({
+export const ProductForm: React.FC<ProductFormProps> = ({
     initialData , categories, colors, sizes
 }) => {
     const params = useParams()
     const router = useRouter()
-    const origin = useOrigin()
 
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const title = initialData ? 'Edit product' : 'Create product'
-    const description = initialData ? 'Edit a product' : 'Add a new product'
-    const toastMessage = initialData ? 'Product updated' : 'Product created'
-    const action = initialData ? 'Save changes' : 'Create'
+    const title         = initialData ? 'Edit product'      : 'Create product'
+    const description   = initialData ? 'Edit a product'    : 'Add a new product'
+    const toastMessage  = initialData ? 'Product updated'   : 'Product created'
+    const action        = initialData ? 'Save changes'      : 'Create'
 
     const defaultValues = initialData ? {
         ...initialData,
@@ -72,14 +70,15 @@ const ProductForm: React.FC<ProductFormProps> = ({
         colorId     : "",
     }
 
-    const form = useForm<ProductFromValues> ({
+    const form = useForm<ProductFormValues> ({
         resolver: zodResolver(formSchema),
         defaultValues
     })
 
-    const onSubmit = async (data: ProductFromValues) => {
+    const onSubmit = async (data: ProductFormValues) => {
         try {
             setLoading(true)
+
             if(initialData) {
                 await axios.patch(`/api/${params.storeId}/products/${params.productId}`, data)
             }else {
@@ -90,7 +89,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
             toast.success(toastMessage)
             
         } catch (error: any) {
-            toast.error('Something went wrong.')
+            toast.error('Something went wrong. Axios Patch or Post Products')
         } finally {
             setLoading(false)
         }
@@ -375,5 +374,3 @@ const ProductForm: React.FC<ProductFormProps> = ({
     </>
     );
 }
- 
-export default ProductForm;

@@ -1,10 +1,10 @@
 import { format } from 'date-fns'
 
 import { prismadbPLSC } from "@/lib/prismadb"
+import { formatter } from '@/lib/utils'
 
 import { OrderClient } from "./components/OrderClient"
 import { OrderColumn } from './components/OrderColumns'
-import { formatter } from '@/lib/utils'
 
 const OrderPage = async(
     { params }: { params: { storeId: string }}
@@ -24,7 +24,7 @@ const OrderPage = async(
             createdAt: 'desc'
         }
     })
-    const formatedOrders: OrderColumn[] = orders.map((item) => ({
+    const formattedOrders: OrderColumn[] = orders.map((item) => ({
         id          : item.id,
         phone       : item.phone,
         address     : item.address,
@@ -39,7 +39,7 @@ const OrderPage = async(
     return (
         <div className="flex-col">
             <div className="flex-1 space-y-4 p-8 pt-6">
-                <OrderClient data={ formatedOrders } />
+                <OrderClient data={ formattedOrders } />
             </div>
         </div>
     )

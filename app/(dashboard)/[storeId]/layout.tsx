@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { auth } from '@clerk/nextjs';
 
 import { prismadbPLSC } from '@/lib/prismadb';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/navbar';
 
 export default async function DashboardLayout({
   children,

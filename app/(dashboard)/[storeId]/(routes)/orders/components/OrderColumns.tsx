@@ -12,7 +12,7 @@ export type OrderColumn = {
     createdAt   : string
 }
 
-export const OrderColumns: ColumnDef<OrderColumn>[] = [
+export const HeaderColumns: ColumnDef<OrderColumn>[] = [
     {
         accessorKey : 'products',
         header      : 'Products',

@@ -1,5 +1,5 @@
 import { prismadbMongo, prismadbPLSC } from "@/lib/prismadb";
-import ColorForm from "./components/color-form";
+import { ColorForm } from "./components/color-form";
 
  
 const ColorIdPage = async (

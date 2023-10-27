@@ -1,5 +1,5 @@
 import { prismadbMongo, prismadbPLSC } from "@/lib/prismadb";
-import ProductForm from "./components/product-form";
+import {ProductForm} from "./components/product-form";
 
  
 const ProductIdPage = async (
@@ -43,4 +43,4 @@ const ProductIdPage = async (
     );
 }
  
-export default ProductIdPage;
+export default ProductIdPage; 

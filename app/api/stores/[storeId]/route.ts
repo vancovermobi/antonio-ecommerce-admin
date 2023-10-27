@@ -3,8 +3,6 @@ import { NextResponse } from 'next/server'
 import { auth } from '@clerk/nextjs';
 
 import { prismadbPLSC, prismadbMongo } from '@/lib/prismadb';
-import StoreMongo from '@/modalsmongoose/storemongo';
-// import { connectToDB } from '@/lib/mongoose';
 
 //===DELETE STORE===
 export async function PATCH(

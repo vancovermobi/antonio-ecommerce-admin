@@ -5,7 +5,7 @@ import { useState } from "react"
 import { ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Input } from "@/components/ui/input"
-import { Button } from "./button"
+import { Button } from "@/components/ui/button"
 
 interface DataTableProps<TData, TValue> {
     data        : TData[],

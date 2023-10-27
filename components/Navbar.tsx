@@ -3,7 +3,7 @@ import { UserButton, auth } from "@clerk/nextjs"
 
 import { prismadbPLSC } from "@/lib/prismadb"
 import StoreSwitcher from "@/components/store-switcher"
-import { MainNavRoutes } from "@/components/MainNavRoutes"
+import { MainNavRoutes } from "@/components/main-nav-routes"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 const Navbar = async () => {
@@ -24,7 +24,7 @@ const Navbar = async () => {
         <div className="flex items-center h-16 px-4">
             
             {/*====Store Switcher=====*/}
-            <StoreSwitcher className="" items={ stores } />
+            <StoreSwitcher items={ stores } />
 
             {/*===Main Nav routes===*/}
             <MainNavRoutes className="mx-6" />

@@ -8,18 +8,18 @@ import { CategoryColumn } from "./components/CategoryColumns";
 const CategoriesPage = async ({ params }: { params: { storeId: string } }) => {
  
     const categories = await prismadbPLSC.category.findMany({
-    where: {
-      storeId: params.storeId,
-    },
-    include: {
-      billboard: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+      where: {
+        storeId: params.storeId,
+      },
+      include: {
+        billboard: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
   
-  const formatedCategories: CategoryColumn[] = categories.map((item) => ({
+  const formattedCategories: CategoryColumn[] = categories.map((item) => ({
     id            : item.id,
     name          : item.name,
     billboardLabel: item.billboard.label,
@@ -29,7 +29,7 @@ const CategoriesPage = async ({ params }: { params: { storeId: string } }) => {
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <CategoriesClient data={ formatedCategories } />
+        <CategoriesClient data={ formattedCategories } />
       </div>
     </div>
   );

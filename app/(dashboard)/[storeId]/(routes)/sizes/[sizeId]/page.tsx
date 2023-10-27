@@ -1,5 +1,5 @@
 import { prismadbMongo, prismadbPLSC } from "@/lib/prismadb";
-import SizeForm from "./components/size-form";
+import {SizeForm} from "./components/size-form";
 
  
 const SizeIdPage = async (
@@ -19,4 +19,4 @@ const SizeIdPage = async (
     );
 }
  
-export default SizeIdPage;
+export default SizeIdPage; 

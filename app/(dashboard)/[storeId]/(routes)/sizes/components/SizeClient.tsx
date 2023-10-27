@@ -6,9 +6,10 @@ import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
-import { SizeColumn, SizeColumns } from "./SizeColumns"
 import { DataTable } from "@/components/ui/data-table"
 import { ApiList } from "@/components/ui/api-list"
+
+import { SizeColumn, HeaderColumns } from "./SizeColumns"
 
 interface SizeClientProps {
     data: SizeColumn[]
@@ -34,7 +35,7 @@ export const SizeClient: React.FC<SizeClientProps> = ({ data }) => {
 
     <Separator />
 
-    <DataTable data={ data } searchKey="name" columns={ SizeColumns } />
+    <DataTable data={ data } searchKey="name" columns={ HeaderColumns } />
 
     <Heading title="API" description="API calls for sizes" />
 

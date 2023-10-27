@@ -5,7 +5,7 @@ import { ObjectId } from 'bson'
 
 import { prismadbPLSC, prismadbMongo } from '@/lib/prismadb';
 
-//=====POST BILLBOARDS========
+//=====POST CATEGORY========
 export async function POST(
     req: Request,
     { params }: { params: { storeId: string } }
@@ -64,12 +64,12 @@ export async function POST(
         )
         
     } catch (error) {
-        console.log('[CATEGORIES_POST_ERROR]', error);
+        console.log('[CATEGORY_POST_ERROR]', error);
         return new NextResponse("Interal error", { status: 500})
     }
 }
 
-//=====GET BILLBOARDS========
+//=====GET CATEGORIES========
 export async function GET(
     req: Request,
     { params }: { params: { storeId: string } }

@@ -1,5 +1,5 @@
 import { prismadbMongo, prismadbPLSC } from "@/lib/prismadb";
-import BillboardForm from "./components/billboard-form";
+import {BillboardForm} from "./components/billboard-form";
 
  
 const BillboardIdPage = async (

@@ -4,8 +4,6 @@ import { auth } from '@clerk/nextjs';
 import { ObjectId } from 'bson'
 
 import { prismadbPLSC, prismadbMongo } from '@/lib/prismadb';
-import { connectToDB } from '@/lib/mongoose';
-import StoreMongo from '@/modalsmongoose/storemongo';
 
 export async function POST(req: Request) {
     try {
@@ -26,12 +24,7 @@ export async function POST(req: Request) {
         if(!name) {
             return new NextResponse("Name is required ", { status: 400 })
         }
-        //===MONGOOSE_DB====
-        // await connectToDB()
-        // const storeMongo = new StoreMongo(storeData)
-        // await storeMongo.save()
-
-         // await prismadbMongo.$connect()
+        //===MONGOOSE_DB====   
         const storeMongo = await prismadbMongo.store.create({
             data: storeData
         })

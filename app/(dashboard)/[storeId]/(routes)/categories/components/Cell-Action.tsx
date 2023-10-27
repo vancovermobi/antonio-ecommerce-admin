@@ -32,10 +32,12 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onConfirm = async () => {
     try {
       setLoading(true);
+
       await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
 
       toast.success("Category deleted.");
       router.refresh();
+
     } catch (error) {
       toast.error(
         "Make sure you removed all product using this category first"
@@ -53,7 +55,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   return (
     <>
       <AlertModal
-        title={`Are you sure delete: ${data?.name} ?`}
+        title={`Are you sure delete category: ${data?.name} ?`}
         description="This action cannot be undone."
         isOpen={open}
         loading={loading}

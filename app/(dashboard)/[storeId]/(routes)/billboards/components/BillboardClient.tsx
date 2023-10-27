@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
-import { BillboardColumn, BillboardColumns } from "./BillboardColumns"
+import { BillboardColumn, HeaderColumns } from "./BillboardColumns"
 import { DataTable } from "@/components/ui/data-table"
 import { ApiList } from "@/components/ui/api-list"
 
@@ -34,7 +34,7 @@ export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
 
     <Separator />
 
-    <DataTable data={ data } searchKey="label" columns={ BillboardColumns } />
+    <DataTable data={ data } searchKey="label" columns={ HeaderColumns } />
 
     <Heading title="API" description="API calls for Billboards" />
 

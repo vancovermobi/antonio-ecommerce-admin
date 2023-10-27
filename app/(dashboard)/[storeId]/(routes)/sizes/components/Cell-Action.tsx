@@ -6,7 +6,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 
-import { SizeColumn } from "./SizeColumns";
 import { AlertModal } from "@/components/modals/alert-modal";
 import {
   DropdownMenu,
@@ -16,6 +15,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+
+import { SizeColumn } from "./SizeColumns";
 
 interface CellActionProps {
   data: SizeColumn;
@@ -31,10 +32,12 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onConfirm = async () => {
     try {
       setLoading(true);
+
       await axios.delete(`/api/${params.storeId}/sizes/${data.id}`);
 
       toast.success("Size deleted.");
       router.refresh();
+      
     } catch (error) {
       toast.error(
         "Make sure you removed all product using this size first"
@@ -52,7 +55,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   return (
     <>
       <AlertModal
-        title={`Are you sure delete: ${data?.name} ?`}
+        title={`Are you sure delete size: ${data?.name} ?`}
         description="This action cannot be undone."
         isOpen={open}
         loading={loading}

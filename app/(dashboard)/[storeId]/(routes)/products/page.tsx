@@ -1,10 +1,10 @@
 import { format } from 'date-fns'
 
 import { prismadbPLSC } from "@/lib/prismadb"
+import { formatter } from '@/lib/utils'
 
 import { ProductClient } from "./components/ProductClient"
 import { ProductColumn } from './components/ProductColumns'
-import { formatter } from '@/lib/utils'
 
 const ProductPage = async(
     { params }: { params: { storeId: string }}
@@ -22,7 +22,7 @@ const ProductPage = async(
             createdAt: 'desc'
         }
     })
-    const formatedProducts: ProductColumn[] = products.map((item) => ({
+    const formattedProducts: ProductColumn[] = products.map((item) => ({
         id          : item.id,
         name        : item.name,
         isFeatured  : item.isFeatured,
@@ -37,7 +37,7 @@ const ProductPage = async(
     return (
         <div className="flex-col">
             <div className="flex-1 space-y-4 p-8 pt-6">
-                <ProductClient data={ formatedProducts } />
+                <ProductClient data={ formattedProducts } />
             </div>
         </div>
     )

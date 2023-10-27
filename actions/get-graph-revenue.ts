@@ -1,5 +1,4 @@
 import { prismadbPLSC } from "@/lib/prismadb"
-import { number } from "zod"
 
 interface GraphData {
     name: string

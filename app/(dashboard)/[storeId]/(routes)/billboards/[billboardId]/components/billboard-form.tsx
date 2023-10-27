@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Trash } from "lucide-react";
 import axios from 'axios'
+
 import { Billboard } from "@/prisma/generated/clientplsc";
 
 import { AlertModal } from "@/components/modals/alert-modal";
@@ -17,35 +18,33 @@ import { Separator } from "@/components/ui/separator";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import ImageUpload from "@/components/ui/image-upload";
-import { useOrigin } from "@/hooks/use-origin";
 
 const formSchema = z.object({
     label: z.string().min(2),
     imageUrl: z.string().min(2),
 })
 
-type BillboardFromValues = z.infer<typeof formSchema>
+type BillboardFormValues = z.infer<typeof formSchema>
 
 interface BillboardFormProps {
     initialData: Billboard | null 
 }
  
-const BillboardForm: React.FC<BillboardFormProps> = ({
+export const BillboardForm: React.FC<BillboardFormProps> = ({
     initialData
 }) => {
     const params = useParams()
     const router = useRouter()
-    const origin = useOrigin()
 
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const title = initialData ? 'Edit billboard' : 'Create billboard'
-    const description = initialData ? 'Edit a billboard' : 'Add a new billboard'
-    const toastMessage = initialData ? 'Billboard updated' : 'Billboard created'
-    const action = initialData ? 'Save changes' : 'Create'
+    const title         = initialData ? 'Edit billboard'    : 'Create billboard'
+    const description   = initialData ? 'Edit a billboard'  : 'Add a new billboard'
+    const toastMessage  = initialData ? 'Billboard updated' : 'Billboard created'
+    const action        = initialData ? 'Save changes'      : 'Create'
 
-    const form = useForm<BillboardFromValues> ({
+    const form = useForm<BillboardFormValues> ({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             label    : '',
@@ -53,20 +52,22 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
         },
     })
 
-    const onSubmit = async (data: BillboardFromValues) => {
+    const onSubmit = async (data: BillboardFormValues) => {
         try {
             setLoading(true)
+
             if(initialData) {
                 await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data)
             }else {
                 await axios.post(`/api/${params.storeId}/billboards`, data)
             }
+
             router.refresh()
             router.push(`/${params.storeId}/billboards`)
             toast.success(toastMessage)
             
         } catch (error: any) {
-            toast.error('Something went wrong.')
+            toast.error('Something went wrong. Axios Patch or Post Billboards')
         } finally {
             setLoading(false)
         }
@@ -174,6 +175,4 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
     </Form>
     </>
     );
-}
- 
-export default BillboardForm;
+} 

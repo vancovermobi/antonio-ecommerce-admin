@@ -17,14 +17,9 @@ const nextConfig = {
           },
         ],
       },
-    
-      webpack5: true,
-      webpack: (config) => {
-        config.resolve.fallback = { fs: false };
-    
-        return config;
+      typescript: {
+        ignoreBuildErrors: true, // temp add for next-auth failded build issues
       },
-      
       experimental: {
         serverComponentsExternalPackages: ['cloudinary', 'graphql-request']
       },
@@ -34,10 +29,6 @@ const nextConfig = {
         // your project has ESLint errors.
         ignoreDuringBuilds: true
       },
-      typescript: {
-        ignoreBuildErrors: true, // temp add for next-auth failded build issues
-      },
-    
 }
 
 module.exports = nextConfig

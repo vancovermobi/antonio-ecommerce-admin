@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
 import { ApiList } from "@/components/ui/api-list";
 
-import { CategoryColumn, CategoryColumns } from "./CategoryColumns";
+import { CategoryColumn, HeaderColumns } from "./CategoryColumns";
 
 interface CategoryClientProps {
   data: CategoryColumn[];
@@ -37,7 +37,7 @@ export const CategoriesClient: React.FC<CategoryClientProps> = ({ data }) => {
 
       <Separator />
 
-      <DataTable data={data} searchKey="name" columns={ CategoryColumns } />
+      <DataTable data={data} searchKey="name" columns={ HeaderColumns } />
 
       <Heading title="API" description="API Calls for Categories" />
 

@@ -43,7 +43,7 @@ export const StoreModal = () => {
         window.location.assign(`/${ response.data?.storePlsc?.id }`)
 
         } catch (error) {
-            toast.error('Something went wrong')
+            toast.error('Something went wrong. Axios Post Store')
         } finally {
             setLoading(false)
         }

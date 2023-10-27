@@ -11,12 +11,12 @@ interface ApiAlertProps {
     variant     : 'public' | 'admin'
 }
 const textMap: Record<ApiAlertProps["variant"], string> = {
-    public: 'Public',
-    admin: 'Admin',
+    public  : 'Public',
+    admin   : 'Admin',
 }
 const variantMap: Record<ApiAlertProps["variant"], BadgeProps["variant"]> = {
-    public: 'secondary',
-    admin: 'destructive',
+    public  : 'secondary',
+    admin   : 'destructive',
 }
 
 export const ApiAlert: React.FC<ApiAlertProps> = ({
@@ -35,7 +35,7 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
         <Alert>
             <Server className="h-4 w-4" />
 
-            <AlertTitle>
+            <AlertTitle className="flex items-center gap-x-2">
                 { title }
                 <Badge variant={variantMap[variant]}>
                     { textMap[variant]}

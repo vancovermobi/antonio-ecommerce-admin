@@ -6,7 +6,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 
-import { ColorColumn } from "./ColorColumns";
 import { AlertModal } from "@/components/modals/alert-modal";
 import {
   DropdownMenu,
@@ -16,6 +15,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+
+import { ColorColumn } from "./ColorColumns";
 
 interface CellActionProps {
   data: ColorColumn;
@@ -31,13 +32,15 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onConfirm = async () => {
     try {
       setLoading(true);
+
       await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
 
       toast.success("Color deleted.");
       router.refresh();
+
     } catch (error) {
       toast.error(
-        "Make sure you removed all product using this color first"
+        "Make sure you removed all products using this color first"
       );
     } finally {
       setOpen(false);
@@ -52,7 +55,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   return (
     <>
       <AlertModal
-        title={`Are you sure delete: ${data?.name} ?`}
+        title={`Are you sure delete color: ${data?.name} ?`}
         description="This action cannot be undone."
         isOpen={open}
         loading={loading}

@@ -4,9 +4,9 @@ import type { Metadata } from 'next'
 
 import { ToasterProvider } from '@/providers/toast-provider'
 import { ModalProvider } from '@/providers/modal-provider'
+import { ThemeProvider } from '@/providers/theme-provider'
 
 import './globals.css'
-import { ThemeProvider } from '@/providers/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 

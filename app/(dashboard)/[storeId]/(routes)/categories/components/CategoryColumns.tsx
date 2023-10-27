@@ -10,7 +10,7 @@ export type CategoryColumn = {
     createdAt       : string
 }
 
-export const CategoryColumns: ColumnDef<CategoryColumn>[] = [
+export const HeaderColumns: ColumnDef<CategoryColumn>[] = [
     {
         accessorKey : 'name',
         header      : 'Name',
@@ -28,4 +28,4 @@ export const CategoryColumns: ColumnDef<CategoryColumn>[] = [
         id: "actions",
         cell: ({ row }) => <CellAction data={ row.original } />
     }
-]
+] 

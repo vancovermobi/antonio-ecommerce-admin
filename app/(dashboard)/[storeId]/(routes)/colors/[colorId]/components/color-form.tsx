@@ -16,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useOrigin } from "@/hooks/use-origin";
 
 const formSchema = z.object({
     name    : z.string().min(2),
@@ -25,48 +24,49 @@ const formSchema = z.object({
     }), 
 })
 
-type ColorFromValues = z.infer<typeof formSchema>
+type ColorFormValues = z.infer<typeof formSchema>
 
 interface ColorFormProps {
     initialData: Color | null 
 }
  
-const ColorForm: React.FC<ColorFormProps> = ({
+export const ColorForm: React.FC<ColorFormProps> = ({
     initialData
 }) => {
     const params = useParams()
     const router = useRouter()
-    const origin = useOrigin()
 
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const title = initialData ? 'Edit color' : 'Create color'
-    const description = initialData ? 'Edit a color' : 'Add a new color'
-    const toastMessage = initialData ? 'Color updated' : 'Color created'
-    const action = initialData ? 'Save changes' : 'Create'
+    const title         = initialData ? 'Edit color'    : 'Create color'
+    const description   = initialData ? 'Edit a color'  : 'Add a new color'
+    const toastMessage  = initialData ? 'Color updated' : 'Color created'
+    const action        = initialData ? 'Save changes'  : 'Create'
 
-    const form = useForm<ColorFromValues> ({
+    const form = useForm<ColorFormValues> ({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             name    : '',
         },
     })
 
-    const onSubmit = async (data: ColorFromValues) => {
+    const onSubmit = async (data: ColorFormValues) => {
         try {
             setLoading(true)
+
             if(initialData) {
                 await axios.patch(`/api/${params.storeId}/colors/${params.colorId}`, data)
             }else {
                 await axios.post(`/api/${params.storeId}/colors`, data)
             }
+
             router.refresh()
             router.push(`/${params.storeId}/colors`)
             toast.success(toastMessage)
             
         } catch (error: any) {
-            toast.error('Something went wrong.')
+            toast.error('Something went wrong. Axios Patch or Post Colors')
         } finally {
             setLoading(false)
         }
@@ -180,5 +180,3 @@ const ColorForm: React.FC<ColorFormProps> = ({
     </>
     );
 }
- 
-export default ColorForm;

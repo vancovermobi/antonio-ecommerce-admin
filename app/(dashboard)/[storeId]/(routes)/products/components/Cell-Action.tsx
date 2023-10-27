@@ -26,6 +26,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     const onConfirm = async () => {
         try {
             setLoading(true)
+
             await axios.delete(`/api/${params.storeId}/products/${data.id}`)
 
             toast.success('Product deleted.')
@@ -46,7 +47,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     return(
     <>
         <AlertModal 
-            title={`Are you sure delete: ${ data?.name } ?`}
+            title={`Are you sure delete product: ${ data?.name } ?`}
             description="This action cannot be undone."
             isOpen={ open }
             loading={ loading }

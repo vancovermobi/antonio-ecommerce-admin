@@ -1,14 +1,14 @@
 "use client"
 
 import * as z from 'zod'
+import React, { useState } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { Trash } from 'lucide-react'
 import { Store } from '@/prisma/generated/clientplsc'
-import { useParams, useRouter } from 'next/navigation'
-import React, { useState } from 'react'
 
 import { useOrigin } from '@/hooks/use-origin'
 import { AlertModal } from '@/components/modals/alert-modal'
@@ -52,7 +52,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
             toast.success(`Store updated. ${ data?.name }`)
 
         } catch (error: any) {
-            toast.error('Something went wrong.')
+            toast.error('Something went wrong. Axios Patch Stores')
         } finally {
             setLoading(false)
         }
