@@ -93,7 +93,7 @@ export async function POST(
     }
 }
 
-//=====GET PRODUCT========
+//=====GET PRODUCTS========
 export async function GET(
     req: Request,
     { params }: { params: { storeId: string } }
@@ -150,7 +150,7 @@ export async function GET(
                 createdAt: 'desc'
             }
         })       
-
+        
         return NextResponse.json( 
             {
                 productsPlsc, 
